@@ -23,7 +23,7 @@ if [[ "${PLUGIN_IMAGE_NAME:-}" ]]; then
     OF_IMAGE="--image=${PLUGIN_IMAGE}"
 fi
 
-if [[ "${PLUGIN_IMAGE_NAME:-}" && ${PLUGIN_REGISTRY:-} ]]; then
+if [[ "${PLUGIN_IMAGE_NAME:-}" && "${PLUGIN_REGISTRY:-}" ]]; then
     OF_IMAGE="--image=${PLUGIN_REGISTRY}/${PLUGIN_IMAGE}"
 fi
 
@@ -44,7 +44,7 @@ if [[ "${PLUGIN_TEMPLATE:-}" ]]; then
 fi 
 #Generate Step
 if [[ ! "${PLUGIN_DEPLOY:-}" ]]; then
-    /usr/bin/faas-cli build ${OF_YAML} --shrinkwrap 
+    /usr/bin/faas-cli build ${OF_YAML:-} --shrinkwrap 
 #Deploy Step
 else
     #Login to OpenFaaS Gateway
