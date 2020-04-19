@@ -1,5 +1,4 @@
 #!/bin/sh
-export
 
 set -euo pipefail
 
@@ -21,7 +20,7 @@ if [[ "${PLUGIN_TAG:-}" ]]; then
 fi
 
 if [[ "${PLUGIN_IMAGE_NAME:-}" ]]; then
-    OF_IMAGE="--image=${PLUGIN_IMAGE}"
+    OF_IMAGE="--image=${PLUGIN_IMAGE_NAME}"
 fi
 
 if [[ "${PLUGIN_IMAGE_NAME:-}" && "${PLUGIN_REGISTRY:-}" ]]; then
@@ -42,13 +41,11 @@ fi
 #Pull store template if needed
 if [[ "${PLUGIN_TEMPLATE:-}" ]]; then
     /usr/bin/faas-cli template store pull "${PLUGIN_TEMPLATE}"
+else
+    /usr/bin/faas-cli template pull https://github.com/openfaas/templates.git
 fi 
 #Generate Step
 if [[ ! "${PLUGIN_DEPLOY:-}" ]]; then
-    /usr/bin/faas-cli template pull https://github.com/openfaas/templates.git
-    pwd
-    ls -ltr
-    ls -ltr template/node12/
     /usr/bin/faas-cli build ${OF_YAML:-} --shrinkwrap
 #Deploy Step
 elif [[ -n "${PLUGIN_PASSWORD:-}" && -n "${PLUGIN_URL:-}" ]]; then
