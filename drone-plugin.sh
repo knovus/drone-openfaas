@@ -48,7 +48,7 @@ if [[ ! "${PLUGIN_DEPLOY:-}" ]]; then
 #Deploy Step
 elif [[ -n "${PLUGIN_PASSWORD:-}" && -n "${PLUGIN_URL:-}" ]]; then
     #Login to OpenFaaS Gateway
-    ${PLUGIN_PASSWORD} | /usr/bin/faas-cli login ${OF_USERNAME:-} --password-stdin ${OF_URL:-} ${TLS_NO_VERIFY:-}
+    echo ${PLUGIN_PASSWORD} | /usr/bin/faas-cli login ${OF_USERNAME:-} --password-stdin ${OF_URL:-} ${TLS_NO_VERIFY:-}
     #Deploy the function
     /usr/bin/faas-cli deploy ${OF_YAML:-} ${OF_URL:-} ${IMAGE:-} ${TAG:-}
     else
