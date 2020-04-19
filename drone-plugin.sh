@@ -45,9 +45,11 @@ if [[ "${PLUGIN_TEMPLATE:-}" ]]; then
 fi 
 #Generate Step
 if [[ ! "${PLUGIN_DEPLOY:-}" ]]; then
-    /usr/bin/faas-cli build ${OF_YAML:-} --shrinkwrap
+    /usr/bin/faas-cli template pull https://github.com/openfaas/templates.git
+    pwd
     ls -ltr template/node12/
     cat template/node12/template.yaml
+    /usr/bin/faas-cli build ${OF_YAML:-} --shrinkwrap
 #Deploy Step
 elif [[ -n "${PLUGIN_PASSWORD:-}" && -n "${PLUGIN_URL:-}" ]]; then
     #Login to OpenFaaS Gateway
