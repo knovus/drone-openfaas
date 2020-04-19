@@ -34,10 +34,6 @@ fi
 #
 #Executing commands!!!
 #
-#Get Tags from Git to be used from OpenFaaS CLI tag
-if [[ "${OF_TAG:-}" ]]; then
-    git fetch --tags
-fi
 #Pull store template if needed
 if [[ "${PLUGIN_TEMPLATE:-}" ]]; then
     /usr/bin/faas-cli template store pull "${PLUGIN_TEMPLATE}"
