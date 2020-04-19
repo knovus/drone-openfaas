@@ -24,7 +24,7 @@ if [[ "${PLUGIN_IMAGE_NAME:-}" ]]; then
 fi
 
 if [[ "${PLUGIN_IMAGE_NAME:-}" && "${PLUGIN_REGISTRY:-}" ]]; then
-    OF_IMAGE="--image=${PLUGIN_REGISTRY}/${PLUGIN_IMAGE}"
+    OF_IMAGE="--image=${PLUGIN_REGISTRY}/${PLUGIN_IMAGE_NAME}"
 fi
 
 if [[ "${PLUGIN_URL:-}" ]]; then
@@ -52,7 +52,7 @@ elif [[ -n "${PLUGIN_PASSWORD:-}" && -n "${PLUGIN_URL:-}" ]]; then
     #Login to OpenFaaS Gateway
     echo ${PLUGIN_PASSWORD} | /usr/bin/faas-cli login ${OF_USERNAME:-} --password-stdin ${OF_URL:-} ${TLS_NO_VERIFY:-}
     #Deploy the function
-    /usr/bin/faas-cli deploy ${OF_YAML:-} ${OF_URL:-} ${IMAGE:-} ${TAG:-}
+    /usr/bin/faas-cli deploy ${OF_YAML:-} ${OF_URL} ${OF_IMAGE:-} ${OF_TAG:-}
     else
         echo "ERROR: Must provide a OpenFaaS Gateway URL (url or plugin_url secret) and Password (password or plugin_password secret) parameters to Deploy"
         exit 1
