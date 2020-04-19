@@ -11,7 +11,7 @@ if [[ "${PLUGIN_TLS_NO_VERIFY:-}" == "true" ]]; then
     OF_TLS_NO_VERIFY="--tls-no-verify"
 fi
 
-if [[ "${PLUGIN_USERNAME:-}" == "true" ]]; then
+if [[ "${PLUGIN_USERNAME:-}" ]]; then
     OF_USERNAME="--username ${PLUGIN_USERNAME}"
 fi
 
@@ -40,15 +40,18 @@ if [[ "${OF_TAG:-}" ]]; then
 fi
 #Pull store template if needed
 if [[ "${PLUGIN_TEMPLATE:-}" ]]; then
-    /usr/bin/faas-cli template store pull "${TEMPLATE}"
+    /usr/bin/faas-cli template store pull "${PLUGIN_TEMPLATE}"
 fi 
 #Generate Step
 if [[ ! "${PLUGIN_DEPLOY:-}" ]]; then
     /usr/bin/faas-cli build ${OF_YAML:-} --shrinkwrap 
 #Deploy Step
-else
+elif [[ -n "${PLUGIN_PASSWORD:-}" && -n "${PLUGIN_URL:-}" ]]; then
     #Login to OpenFaaS Gateway
     ${PLUGIN_PASSWORD} | /usr/bin/faas-cli login ${OF_USERNAME:-} --password-stdin ${OF_URL:-} ${TLS_NO_VERIFY:-}
     #Deploy the function
     /usr/bin/faas-cli deploy ${OF_YAML:-} ${OF_URL:-} ${IMAGE:-} ${TAG:-}
+    else
+        echo "ERROR: Must provide a OpenFaaS Gateway URL (url or plugin_url secret) and Password (password or plugin_password secret) parameters to Deploy"
+        exit 1
 fi
