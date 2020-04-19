@@ -21,7 +21,7 @@ Example .drone for Drone <1.0 (pushing OpenFaas Function to Private Docker Regis
       - source: openfaas_password
         target: plugin_password
       yaml: my_function.yml #Optional, If you use stack.yml, you can omit this parameter
-      image: private_registry/image_name #Optional, Use only if you want override config from .yml
+      image_name: private_registry/image_name #Optional, Use only if you want override config from .yml
       tag: latest #Optional, If you want to use OpenFaaS tag, accepts 'latest', 'sha', 'branch', or 'describe'
       url: my.openfaas.com #OpenFaaS Gateway URL
       tls_no_verify: true #Optional

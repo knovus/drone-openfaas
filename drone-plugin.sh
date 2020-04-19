@@ -19,8 +19,12 @@ if [[ "${PLUGIN_TAG:-}" ]]; then
     OF_TAG="--tag=${PLUGIN_TAG}"
 fi
 
-if [[ "${PLUGIN_IMAGE:-}" ]]; then
+if [[ "${PLUGIN_IMAGE_NAME:-}" ]]; then
     OF_IMAGE="--image=${PLUGIN_IMAGE}"
+fi
+
+if [[ "${PLUGIN_IMAGE_NAME:-}" && ${PLUGIN_REGISTRY:-} ]]; then
+    OF_IMAGE="--image=${PLUGIN_REGISTRY}/${PLUGIN_IMAGE}"
 fi
 
 if [[ "${PLUGIN_URL:-}" ]]; then
