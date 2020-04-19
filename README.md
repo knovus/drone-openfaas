@@ -20,6 +20,7 @@ Example .drone for Drone <1.0 (pushing OpenFaas Function to Private Docker Regis
       secrets:
       - source: openfaas_password
         target: plugin_password
+      deploy: true
       yaml: my_function.yml #Optional, If you use stack.yml, you can omit this parameter
       image_name: private_registry/image_name #Optional, Use only if you want override config from .yml
       tag: latest #Optional, If you want to use OpenFaaS tag, accepts 'latest', 'sha', 'branch', or 'describe'
@@ -46,6 +47,7 @@ steps:
 - name: deploy
   image: knovus/drone-openfaas
   settings:
+    deploy: true
     yaml: my_function.yml #Optional, If you use stack.yml, you can omit this parameter
     image: private_registry/image_name #Optional, Use only if you want override config from .yml
     tag: latest #Optional, If you want to use OpenFaaS tag, accepts 'latest', 'sha', 'branch', or 'describe'

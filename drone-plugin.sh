@@ -39,12 +39,12 @@ if [[ "${OF_TAG:-}" ]]; then
     git fetch --tags
 fi
 #Pull store template if needed
-if [[ -n "${PLUGIN_TEMPLATE:-}" ]]; then
+if [[ "${PLUGIN_TEMPLATE:-}" ]]; then
     /usr/bin/faas-cli template store pull "${TEMPLATE}"
 fi 
 #Generate Step
 if [[ ! "${PLUGIN_DEPLOY:-}" ]]; then
-    /usr/bin/faas-cli build ${OF_YAML:-} --shrinkwrap 
+    /usr/bin/faas-cli build ${OF_YAML} --shrinkwrap 
 #Deploy Step
 else
     #Login to OpenFaaS Gateway
