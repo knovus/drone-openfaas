@@ -8,6 +8,9 @@ Example .drone for Drone <1.0 (pushing OpenFaas Function to Private Docker Regis
 
 ```yaml
   pipeline:
+    clone:  # Optional, This step is needed to configure Git Clone Plugin to fetch tags, to use with TAG parameter in OpenFaaS deploy.
+      image: plugins/git
+      tags: true
     generate:
       image: knovus/drone-openfaas
       yaml: my_function.yml #If you use stack.yml, you can omit this parameter
@@ -34,7 +37,10 @@ Example .drone for Drone >=1.0 (pushing OpenFaas Function to Private Docker Regi
 ```yaml
 kind: pipeline
 name: default
-
+clone: # Optional, This step is needed to configure Git Clone Plugin to fetch tags, to use with TAG parameter in OpenFaaS deploy.
+  git:
+    image: plugins/git
+    tags: true
 steps:
 - name: generate
   image: knovus/drone-openfaas
