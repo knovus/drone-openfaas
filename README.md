@@ -2,7 +2,7 @@
 
 An OpenFaaS Plugin for Drone.io.
 
-This plugin is based on openfaas-cli and is intended to use only for generation (Dockerfile and stuffs) and deploy (Create/Update Function to OpenFaaS), because this image don't have support for docker in docker, and does wan't to have it in the future.  Use a diferent step to build and publish docker image, like kaniko or a docker in docker plugin.
+This plugin is based on openfaas-cli and is intended to use only for generation (Dockerfile and stuffs) and deploy (Create/Update Function to OpenFaaS), because this image don't have support for docker in docker.  Use a diferent step to build and publish docker image, like kaniko or a docker in docker plugin.
 
 Example .drone for Drone <1.0 (pushing OpenFaas Function to Private Docker Registry)
 
