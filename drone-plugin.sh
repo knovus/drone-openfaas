@@ -35,9 +35,9 @@ fi
 #Executing commands!!!
 #
 #Pull store template if needed
-if [[ "${PLUGIN_TEMPLATE:-}" && ! "${PLUGIN_DEPLOY:-}" ]]; then
+if [[ "${PLUGIN_TEMPLATE:-}" ]]; then
     /usr/bin/faas-cli template store pull "${PLUGIN_TEMPLATE}"
-else
+elif [[ ! "${PLUGIN_DEPLOY:-}" ]]
     /usr/bin/faas-cli template pull https://github.com/openfaas/templates.git
 fi 
 #Generate Step
